@@ -1,6 +1,8 @@
 local x = 100
 local v = 500
+
 local tick
+
 function love.load()
     tick = require "tick"
     Object = require "classic"
