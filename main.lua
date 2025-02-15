@@ -4,29 +4,12 @@ local t = 1
 local fun = {}
 local tick
 
-function func()
-    local _fun = {}
-    --- @param x number 0~1
-    --- @return number 0~1
-    function _fun:fun(x)
-        local y = x
-        return y
-    end
-
-    function _fun:draw(x, y)
-        for i = 1, x, 1 do
-            love.graphics.points(i, self:fun(i/x)*y)
-        end
-    end
-
-    return _fun
-end
-
 function love.load()
     tick = require "tick"
     Object = require "classic"
+    F = require "func"
     Player = Object:extend()
-    fun[0] = func()
+    fun[0] = Function()
 end
 
 function love.update(dt)
