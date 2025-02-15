@@ -1,29 +1,32 @@
 local x = 100
 local v = 500
 local t = 1
+local fun = {}
 local tick
 
 function func()
-    local fun = {}
-    --- @param x 0~1
-    --- @return y 0~1
-    function fun:fun(x)
-        return x
+    local _fun = {}
+    --- @param x number 0~1
+    --- @return number 0~1
+    function _fun:fun(x)
+        local y = x
+        return y
     end
 
-    function fun:draw(x, y)
+    function _fun:draw(x, y)
         for i = 1, x, 1 do
             love.graphics.points(i, self:fun(i/x)*y)
         end
     end
 
-    return fun
+    return _fun
 end
 
 function love.load()
     tick = require "tick"
     Object = require "classic"
     Player = Object:extend()
+    fun[0] = func()
 end
 
 function love.update(dt)
@@ -48,10 +51,12 @@ function love.draw()
     -- love.graphics.print("Hello, World!", 100, 200) -- 打印文本
     love.graphics.rectangle("line", x, 50, 200, 150)
 
-    local fun = func()
-    function fun:fun(x)
-        return (math.sin(x * 2 * math.pi + t) + 1)/2
+    for key, value in pairs(fun) do
+        if key == 1 then
+            function value:fun(x)
+                return (math.sin(x * 2 * math.pi + t) + 1)/2
+            end
+        end
+        value:draw(love.window.getMode())
     end
-
-    fun:draw(love.window.getMode())
 end
