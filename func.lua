@@ -28,25 +28,13 @@ function Sin()
 end
 
 function PerlinNoise(smooth_step_n)
+    require "combination"
     smooth_step_n = smooth_step_n or 1
-    local function combination(n, k)
-        if n < k then
-            return combination(k, n)
-        end
-        if k == 0 or k == n then
-            return 1
-        end
-        if k == 1 then
-            return n
-        end
-        return combination(n - 1, k - 1) + combination(n - 1, k)
-    end
-
     local function smooth_step(n)
         local function _smooth_step(x)
             local result = 0
             for k = 0, n, 1 do
-                result = result + combination(n + k, k) * combination(2 * n + 1, n - k) * (-x) ^ k
+                result = result + Combination(n + k, k) * Combination(2 * n + 1, n - k) * (-x) ^ k
             end
             return result * x ^ (n + 1)
         end
