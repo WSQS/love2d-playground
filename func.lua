@@ -7,9 +7,9 @@ function Function()
         return y
     end
 
-    function _fun:draw(x, y)
+    function _fun:draw(x, y, x_offset)
         for i = 1, x, 1 do
-            love.graphics.points(i, self:fun(i / x) * y)
+            love.graphics.points(i, self:fun(i / x + x_offset) * y)
         end
     end
 
@@ -26,3 +26,4 @@ function Sin()
 
     return _fun;
 end
+

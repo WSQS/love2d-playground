@@ -27,15 +27,15 @@ function love.update(dt)
         x = x - v * dt
     end
     tick.update(dt)
-    t = t + 0.1
+    t = t + 0.01
 end
 
 function love.draw()
     love.graphics.setColor(255, 255, 255) -- 设置文字颜色为白色
     -- love.graphics.print("Hello, World!", 100, 200) -- 打印文本
     love.graphics.rectangle("line", x, 50, 200, 150)
-
+    local width, height, _ = love.window.getMode()
     for kay, value in pairs(fun) do
-        value:draw(love.window.getMode())
+        value:draw(width,height,t)
     end
 end
