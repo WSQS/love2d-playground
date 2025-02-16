@@ -11,6 +11,7 @@ function love.load()
     Player = Object:extend()
     fun[0] = Function()
     fun[1] = Sin()
+    fun[2] = PerlinNoise()
 end
 
 function love.update(dt)
