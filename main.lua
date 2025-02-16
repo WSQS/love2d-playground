@@ -36,6 +36,6 @@ function love.draw()
     love.graphics.rectangle("line", x, 50, 200, 150)
     local width, height, _ = love.window.getMode()
     for kay, value in pairs(fun) do
-        value:draw(width,height,t)
+        value:draw(width, height, t)
     end
 end
