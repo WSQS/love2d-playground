@@ -28,7 +28,7 @@ function love.update(dt)
         x = x - v * dt
     end
     tick.update(dt)
-    t = t + 0.01
+    t = t + dt
 end
 
 function love.draw()
