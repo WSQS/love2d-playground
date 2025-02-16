@@ -32,7 +32,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setColor(255, 255, 255) -- 设置文字颜色为白色
+    love.graphics.setColor(1, 1, 1)
     -- love.graphics.print("Hello, World!", 100, 200) -- 打印文本
     love.graphics.rectangle("line", x, 50, 200, 150)
     local width, height, _ = love.window.getMode()
