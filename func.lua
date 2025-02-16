@@ -39,6 +39,9 @@ function PerlinNoise()
         end
         _fun.array[#_fun.array + 1] = rand
     end
+    --- comment
+    --- @param x number
+    --- @return smooth_f result
     function _fun.smooth_step(x)
         return 3 * x ^ 2 - 2 * x ^ 3
     end
