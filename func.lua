@@ -27,8 +27,32 @@ function Sin()
     return _fun
 end
 
-function PerlinNoise()
-    math.randomseed(os.time())
+function PerlinNoise(smooth_step_n)
+    smooth_step_n = smooth_step_n or 1
+    local function combination(n, k)
+        if n < k then
+            return combination(k, n)
+        end
+        if k == 0 or k == n then
+            return 1
+        end
+        if k == 1 then
+            return n
+        end
+        return combination(n - 1, k - 1) + combination(n - 1, k)
+    end
+
+    local function smooth_step(n)
+        local function _smooth_step(x)
+            local result = 0
+            for k = 0, n, 1 do
+                result = result + combination(n + k, k) * combination(2 * n + 1, n - k) * (-x) ^ k
+            end
+            return result * x ^ (n + 1)
+        end
+        return _smooth_step
+    end
+    math.randomseed(42)
     local _fun = Function()
     _fun.width = 10
     _fun.array = {}
@@ -39,12 +63,7 @@ function PerlinNoise()
         end
         _fun.array[#_fun.array + 1] = rand
     end
-    --- comment
-    --- @param x number
-    --- @return smooth_f result
-    function _fun.smooth_step(x)
-        return 3 * x ^ 2 - 2 * x ^ 3
-    end
+    _fun.smooth_step = smooth_step(smooth_step_n)
 
     function _fun:fun(x)
         local a = math.floor(x / self.width)
